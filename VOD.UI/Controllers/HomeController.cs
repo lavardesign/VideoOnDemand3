@@ -4,22 +4,29 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using VOD.UI.Models;
+using VOD.Common.Entities;
 
 namespace VOD.UI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private SignInManager<VODUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, SignInManager<VODUser> signInMgr)
         {
             _logger = logger;
+            _signInManager = signInMgr;
         }
 
         public IActionResult Index()
         {
+            if (!_signInManager.IsSignedIn(User))
+                return RedirectToPage("/Account/Login", new { Area = "Identity" });
+
             return View();
         }
 
