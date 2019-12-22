@@ -11,12 +11,24 @@ namespace VOD.Database.Contexts
 {
     public class VODContext : IdentityDbContext<VODUser>
     {
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Download> Downloads { get; set; }
+        public DbSet<Instructor> Instructors { get; set; }
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<UserCourse> UserCourses { get; set; }
+        public DbSet<Video> Videos { get; set; }
+
         public VODContext(DbContextOptions<VODContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             SeedData(builder);
+            builder.Entity<UserCourse>().HasKey(uc => new { uc.UserId, uc.CourseId });
+            foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
 
         private void SeedData(ModelBuilder builder)
@@ -140,6 +152,39 @@ namespace VOD.Database.Contexts
             SaveChanges();
         }
 
+        public void SeedMembershipData()
+        {
+            var description = "Overflow error ip fopen lib stack syn cache stack trace firewall infinite loop d00dz for chown throw race condition int bit ascii. Server linux eaten by a grue emacs gurfle Leslie Lamport protected default *.* pwned. Less giga piggyback frack python client L0phtCrack blob fatal sql tera while then semaphore ack deadlock.";
+            var email = "a@b.c";
+            var userId = string.Empty;
 
+            if (Users.Any(r => r.Email.Equals(email)))
+                userId = Users.First(r => r.Email.Equals(email)).Id;
+            else
+                return;
+
+            if (!Instructors.Any())
+            {
+                var instructors = new List<Instructor>
+                {
+                    new Instructor
+                    {
+                        Name = "John Doe",
+                        Description = description.Substring(20, 50),
+                        Thumbnail = "/images/Ice-Age-Scrat-icon.png"
+                    },
+                    new Instructor
+                    {
+                        Name = "Jane Doe",
+                        Description = description.Substring(30, 40),
+                        Thumbnail = "/images/Ice-Age-Scrat-icon.png"
+                    }
+                };
+                Instructors.AddRange(instructors);
+                SaveChanges();
+            }
+
+            if (Instructors.Count() < 2) return;
+        }
     }
 }
