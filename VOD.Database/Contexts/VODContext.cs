@@ -185,6 +185,136 @@ namespace VOD.Database.Contexts
             }
 
             if (Instructors.Count() < 2) return;
+
+            if (!Courses.Any())
+            {
+                var instructorId1 = Instructors.First().Id;
+                var instructorId2 = Instructors.Skip(1).FirstOrDefault().Id;
+
+                var courses = new List<Course>
+                {
+                    new Course
+                    {
+                        InstructorId = instructorId1,
+                        Title = "Course 1",
+                        Description = description,
+                        ImageUrl = "/images/course1.jpg",
+                        MarqueeImageUrl = "/images/laptop.jpg"
+                    },
+                    new Course
+                    {
+                        InstructorId = instructorId2,
+                        Title = "Course 2",
+                        Description = description,
+                        ImageUrl = "/images/course2.jpg",
+                        MarqueeImageUrl = "/images/laptop.jpg"
+                    },
+                    new Course
+                    {
+                        InstructorId = instructorId1,
+                        Title = "Course 3",
+                        Description = description,
+                        ImageUrl = "/images/course3.jpg",
+                        MarqueeImageUrl = "/images/laptop.jpg"
+                    }
+                };
+                Courses.AddRange(courses);
+                SaveChanges();
+            }
+
+            if (Courses.Count() < 3) return;
+
+            var courseId1 = Courses.First().Id;
+            var courseId2 = Courses.Skip(1).FirstOrDefault().Id;
+            var courseId3 = Courses.Skip(2).FirstOrDefault().Id;
+
+            if (!UserCourses.Any())
+            {
+                if (!courseId1.Equals(int.MinValue))
+                    UserCourses.Add(new UserCourse { UserId = userId, CourseId = courseId1 });
+
+                if (!courseId2.Equals(int.MinValue))
+                    UserCourses.Add(new UserCourse { UserId = userId, CourseId = courseId2 });
+
+                if (!courseId3.Equals(int.MinValue))
+                    UserCourses.Add(new UserCourse { UserId = userId, CourseId = courseId3 });
+
+                SaveChanges();
+            }
+
+            if (UserCourses.Count() < 3) return;
+
+            if (!Modules.Any())
+            {
+                var modules = new List<Module>
+                {
+                    new Module { Course = Find<Course>(courseId1), Title = "Module 1" },
+                    new Module { Course = Find<Course>(courseId1), Title = "Module 2" },
+                    new Module { Course = Find<Course>(courseId2), Title = "Module 3" },
+                };
+                Modules.AddRange(modules);
+                SaveChanges();
+            }
+
+            if (Modules.Count() < 3) return;
+
+            var moduleId1 = Modules.First().Id;
+            var moduleId2 = Modules.Skip(1).FirstOrDefault().Id;
+            var moduleId3 = Modules.Skip(2).FirstOrDefault().Id;
+
+            if (!Videos.Any())
+            {
+                var videos = new List<Video>
+                {
+                    new Video { ModuleId = moduleId1, CourseId = courseId1,
+                    Title = "Video 1 Title",
+                    Description = description.Substring(1,35),
+                    Duration = 50, Thumbnail = "/images/video1.jpg",
+                    Url =  "https://www.youtube.com/watch?v=BJFyzpBcaCY"
+                    },
+                    new Video { ModuleId = moduleId1, CourseId = courseId1,
+                    Title = "Video 2 Title",
+                    Description = description.Substring(5,35),
+                    Duration = 45, Thumbnail = "/images/video2.jpg",
+                    Url =  "https://www.youtube.com/watch?v=BJFyzpBcaCY"
+                    },
+                    new Video { ModuleId = moduleId1, CourseId = courseId1,
+                    Title = "Video 3 Title",
+                    Description = description.Substring(10,35),
+                    Duration = 41, Thumbnail = "/images/video3.jpg",
+                    Url =  "https://www.youtube.com/watch?v=BJFyzpBcaCY"
+                    },
+                    new Video { ModuleId = moduleId3, CourseId = courseId2,
+                    Title = "Video 4 Title",
+                    Description = description.Substring(15,35),
+                    Duration = 41, Thumbnail = "/images/video4.jpg",
+                    Url =  "https://www.youtube.com/watch?v=BJFyzpBcaCY"
+                    },
+                    new Video { ModuleId = moduleId2, CourseId = courseId1,
+                    Title = "Video 5 Title",
+                    Description = description.Substring(20,35),
+                    Duration = 42, Thumbnail = "/images/video5.jpg",
+                    Url =  "https://www.youtube.com/watch?v=BJFyzpBcaCY"
+                    },
+                };
+                Videos.AddRange(videos);
+                SaveChanges();
+            }
+
+            if (!Downloads.Any())
+            {
+                var downloads = new List<Download>
+                {
+                    new Download { ModuleId = moduleId1, CourseId = courseId1,
+                    Title = "ADO.NET 1 (PDF)", Url = "https://some-url" },
+                    new Download { ModuleId = moduleId1, CourseId = courseId1,
+                    Title = "ADO.NET 2 (PDF)", Url = "https://some-url" },
+                    new Download { ModuleId = moduleId3, CourseId = courseId2,
+                    Title = "ADO.NET 1 (PDF)", Url = "https://some-url" },
+                };
+                Downloads.AddRange(downloads);
+                SaveChanges();
+            }
         }
     }
 }
