@@ -8,13 +8,16 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using VOD.UI.Models;
 using VOD.Common.Entities;
+using VOD.Database.Services;
+using VOD.UI.Services;
+using VOD.Common.Extensions;
 
 namespace VOD.UI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private SignInManager<VODUser> _signInManager;
+        private readonly SignInManager<VODUser> _signInManager;
 
         public HomeController(ILogger<HomeController> logger, SignInManager<VODUser> signInMgr)
         {
