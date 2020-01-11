@@ -1,21 +1,27 @@
 ﻿.no-border-radius {
     border-radius: 0;
 }
+
 .no-left-padding {
     padding-left: 0;
 }
+
 .no-right-padding {
     padding-right: 0;
 }
+
 .no-top-padding {
     padding-top: 0;
 }
+
 .no-bottom-padding {
     padding-bottom: 0;
 }
+
 .vertical-align {
     vertical-align: middle;
 }
+
 .small-bottom-margin {
     margin-bottom: 10px;
 }
@@ -23,21 +29,27 @@
 .small-top-margin {
     margin-top: 10px;
 }
+
 .small-left-margin {
     margin-left: 10px;
 }
+
 .no-margin {
     margin: 0;
 }
+
 .text-small {
     font-size: small;
 }
+
 .text-large {
     font-size: larger;
 }
+
 .no-text-decoration {
     text-decoration: none;
 }
+
 .overflow-hidden {
     overflow: hidden;
 }
@@ -51,6 +63,7 @@
     border: 4px solid #FFF;
     border-radius: 2px;
 }
+
 .card .marquee {
     width: 100%;
     height: 400px;
@@ -63,12 +76,15 @@
 .module-video:hover {
     background-color: #5ab3ff;
 }
+
 .module-video a:hover {
     text-decoration: none;
 }
+
 .module-video .media-body {
     margin-left: 5px;
 }
+
 .module-video h5 {
     margin-top: -5px;
 }
@@ -83,6 +99,7 @@
     text-align: center;
     margin-top: 10px;
 }
+
 .instructor-bio .rounded-circle {
     border: 2px solid #2d91fb;
     padding: 8px;
@@ -94,6 +111,7 @@
     position: relative !important;
     padding-top: 56.25% !important;
 }
+
 .video-player iframe {
     position: absolute;
     top: 0;
@@ -101,6 +119,7 @@
     width: 100%;
     height: 100%;
 }
+
 .video-course img {
     width: 50px;
 }
@@ -108,13 +127,16 @@
 .coming-up .btn-group {
     width: 100%;
 }
+
 .coming-up .btn-group .btn {
     width: 50%;
     border-radius: 0;
 }
+
 .coming-up .btn-group [disabled]:hover {
     cursor: not-allowed;
 }
+
 .coming-up img {
     width: 100%;
     height: auto;
