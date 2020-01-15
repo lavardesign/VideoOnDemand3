@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using VOD.Database.Contexts;
 using VOD.Common.Entities;
 using VOD.Database.Services;
+using VOD.Common.Services;
 
 namespace VOD.Admin
 {
@@ -39,6 +40,7 @@ namespace VOD.Admin
             services.AddScoped<IDbReadService, DbReadService>();
             services.AddScoped<IDbWriteService, DbWriteService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAdminService, AdminEFService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

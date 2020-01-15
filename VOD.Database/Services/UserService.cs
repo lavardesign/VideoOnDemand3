@@ -44,7 +44,7 @@ namespace VOD.Database.Services
                 var deleted = await _userManager.DeleteAsync(dbUser);
                 return deleted.Succeeded;
             }
-            catch(Exception ex)
+            catch
             {
                 return false;
             }
