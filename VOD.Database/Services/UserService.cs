@@ -39,12 +39,12 @@ namespace VOD.Database.Services
                 if (dbUser == null) return false;
 
                 var userRoles = await _userManager.GetRolesAsync(dbUser);
-                var roleRemoved = _userManager.RemoveFromRolesAsync(dbUser, userRoles);
+                var roleRemoved = await _userManager.RemoveFromRolesAsync(dbUser, userRoles);
 
                 var deleted = await _userManager.DeleteAsync(dbUser);
                 return deleted.Succeeded;
             }
-            catch
+            catch(Exception ex)
             {
                 return false;
             }

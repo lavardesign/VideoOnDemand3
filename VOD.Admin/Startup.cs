@@ -37,6 +37,7 @@ namespace VOD.Admin
                 .AddEntityFrameworkStores<VODContext>();
             services.AddRazorPages();
             services.AddScoped<IDbReadService, DbReadService>();
+            services.AddScoped<IDbWriteService, DbWriteService>();
             services.AddScoped<IUserService, UserService>();
         }
 
