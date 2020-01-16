@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace VOD.Common.DTOModels.Admin
+{
+    public class DownloadDTO
+    {
+        public int Id { get; set; }
+        [MaxLength(80), Required]
+        public string Title { get; set; }
+        [MaxLength(1024)]
+        public string Url { get; set; }
+        public int ModuleId { get; set; }
+        public int CourseId { get; set; }
+        public string Module { get; set; }
+        public string Course { get; set; }
+        public ButtonDTO ButtonDTO { get { return new ButtonDTO(CourseId, ModuleId, Id); } }
+    }
+}
