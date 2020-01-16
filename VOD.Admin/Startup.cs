@@ -15,6 +15,7 @@ using VOD.Database.Contexts;
 using VOD.Common.Entities;
 using VOD.Database.Services;
 using VOD.Common.Services;
+using AutoMapper;
 
 namespace VOD.Admin
 {
@@ -37,10 +38,13 @@ namespace VOD.Admin
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<VODContext>();
             services.AddRazorPages();
+
             services.AddScoped<IDbReadService, DbReadService>();
             services.AddScoped<IDbWriteService, DbWriteService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAdminService, AdminEFService>();
+
+            services.AddAutoMapper(typeof(Startup), typeof(Instructor), typeof(Course), typeof(Module), typeof(Video), typeof(Download));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -14,6 +14,8 @@ namespace VOD.Admin.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly IDbReadService _db;
+        [TempData]
+        public string Alert { get; set; }
 
         public (CardViewModel Instructors, CardViewModel Users, CardViewModel Courses,
                 CardViewModel Modules, CardViewModel Videos, CardViewModel Downloads) Cards;
