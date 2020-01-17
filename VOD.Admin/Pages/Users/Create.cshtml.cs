@@ -26,6 +26,8 @@ namespace VOD.Admin.Pages.Users
 
         public async Task OnGetAsync()
         {
+            await Task.FromResult<object>(null);
+            return;
         }
 
         public async Task<IActionResult> OnPostAsync()

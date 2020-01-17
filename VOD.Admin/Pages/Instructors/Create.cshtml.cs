@@ -28,6 +28,8 @@ namespace VOD.Admin.Pages.Instructors
 
         public async Task OnGetAsync()
         {
+            await Task.FromResult<object>(null);
+            return;
         }
 
         public async Task<IActionResult> OnPostAsync()
